@@ -109,7 +109,7 @@ SubmitPuzzle.onclick =function()
 {
 	if(ans_seen==1)
 	{
-		alert('Can not Submit after seeing the Answer !!!');
+		alert('Can not Submit after watching the Answer !!!');
 		return;
 	}
 	check(board);
@@ -153,24 +153,16 @@ function new_game()
 
 	 //check=setInterval(set_timer,1000);//calling the set_time() in every second;
 
+	 //removing selected digit plate
 	if (numSelected != null) {
         numSelected.classList.remove("number-selected");
 		numSelected=null;
     }
-
-	for(let i=0;i<9;i++)
-		for(let j=0;j<9;j++)
-		arr[i][j].style.color='aliceblue';
 		
 
-	// XMLHttpRequest (XHR) objects are used to interact with servers. 
-	// You can retrieve data from a URL without having to do a full page refresh. 
-	// This enables a Web page to update just part of a page without disrupting what the user is doing.
-	var xhrRequest = new XMLHttpRequest() 
-	xhrRequest.onload = function () { //WHEN the page will be loaded
-		var response = JSON.parse(xhrRequest.response)//received data is a string,so we are parsing the data into js object
-		//console.log(response)
-		board = response.board;
+	//generate a new board
+	 generate_board(board,ans);
+	 
 		
 		//making copy of the board to solve it using backtracking
 		for(let i=0;i<9;i++)
@@ -182,18 +174,71 @@ function new_game()
 					arr[i][j].style.color='yellow';
 				}
 				board_copy[i][j]=board[i][j];
-				ans[i][j]=board[i][j];
+				//ans[i][j]=board[i][j];
 			}
 		}
 		FillBoard(board);
-		SudokuSolver(ans);
-	}
-	// data is of the form ->  {"board":[[0,0,0,0,0,0,0,0,1],[0,0,0,0,5,9,0,0,0],[0,8,9,0,6,0,2,3,0],[2,0,0,3,0,0,0,0,0],[0,6,0,0,0,0,7,0,4],[0,9,0,0,2,0,0,0,3],[5,3,0,7,0,2,9,0,0],[6,4,2,9,8,0,5,1,0],[9,0,0,0,0,0,3,4,2]]}
-	xhrRequest.open('get', 'https://sugoku.herokuapp.com/board?difficulty=easy')
-	//we can change the difficulty of the puzzle the allowed values of difficulty are easy, medium, hard and random
-	xhrRequest.send()
+		
 }
 
+function generate_board(board,ans)
+{
+	//randomly select a tiles
+	//random() -> generates num [0,1)
+	let row=Math.floor(Math.random()*10);
+	let col=Math.floor(Math.random()*10);
+	let i,j;
+	//row or col ==9 is invalid
+	if(row==9)
+	{
+		row=8;
+	}
+	if(col==9)
+	{
+		col=8;
+	}
+	for(i=0;i<9;i++)
+	{
+		for(j=0;j<9;j++)
+		{
+			ans[i][j]=0;
+			board[i][j]=0;
+		}
+	}
+	let num=Math.floor(Math.random()*10);//placing random no. on that tiles
+
+	//num==0 not possible
+	if(num==0)
+	 ans[row][col]=num+1;
+	else
+	 ans[row][col]=num;
+	 
+	SudokuSolver(ans);
+
+	//creating a board by placing some random board[i][j]==ans[row][col]
+	//filling 60 places 
+	for(i=0;i<60;i++)
+	{
+		 row=Math.floor(Math.random()*10);
+		 col=Math.floor(Math.random()*10);
+
+		 //as row or col ==9 is invalid
+		 if(row==9)
+		 {
+			 row=8;
+		 }
+		 if(col==9)
+		 {
+			 col=8;
+		 }
+
+		 board[row][col]=ans[row][col];
+	}
+
+	
+}
+
+//solve puzzle using backtracking
 function SudokuSolver(board) {
 	if(solve(board)==false)
 	{
