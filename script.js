@@ -338,7 +338,7 @@ function check(board)
 	{
 		for(j=0;j<9;j++)
 		{
-			if(board[i][j]==0 || !isSolve(board,i,j,board[i][j]))
+			if(board[i][j]==0)
 			{
 				alert("You Lost !!!");
 				return;
