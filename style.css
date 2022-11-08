@@ -112,7 +112,7 @@ html{
     background-color: #2d6898;
 }
 
-#GetPuzzle,#SolvePuzzle,#RestartPuzzle,#SubmitPuzzle,#undo,#redo{
+#GetPuzzle,#SolvePuzzle,#RestartPuzzle,#SubmitPuzzle{
     display: inline-block;
     text-decoration: none;
     color: #fff;
@@ -127,7 +127,7 @@ html{
     border-radius: 1rem;
 }
 
-#GetPuzzle:hover,#SolvePuzzle:hover,#RestartPuzzle:hover,#SubmitPuzzle:hover,#undo:hover,#redo:hover{
+#GetPuzzle:hover,#SolvePuzzle:hover,#RestartPuzzle:hover,#SubmitPuzzle:hover{
     background-color: #2d6898;
 }
 
