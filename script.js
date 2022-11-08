@@ -2,9 +2,6 @@ var arr = [[], [], [], [], [], [], [], [], []]
 let numSelected=null;
 let flag=0;
 let ans_seen=0;
-let undo_b=null;
-let redo_b=null;
-let redo_num=0;
 
 //for timer
 // let start_time=.1;
@@ -53,6 +50,7 @@ for (var i = 0; i < 9; i++) {
 var board = [[], [], [], [], [], [], [], [], []]
 var board_copy = [[], [], [], [], [], [], [], [], []]
 var ans = [[], [], [], [], [], [], [], [], []]
+var lock = [[], [], [], [], [], [], [], [], []]
 
 function FillBoard(board) {
 	for (var i = 0; i < 9; i++) {
@@ -71,9 +69,6 @@ let GetPuzzle = document.getElementById('GetPuzzle');
 let SolvePuzzle = document.getElementById('SolvePuzzle');
 let RestartPuzzle = document.getElementById('RestartPuzzle');
 let SubmitPuzzle = document.getElementById('SubmitPuzzle');
-let undo = document.getElementById('undo');
-let redo = document.getElementById('redo');
-
 
 //New Game button -> on clicking the button GetPuzzle , fetching the API that contents the board
 GetPuzzle.onclick = function () {
@@ -91,8 +86,6 @@ RestartPuzzle.onclick = function(){
 
 	if(flag==0) //if new-game button is not placed then return
 		return ;
-	undo_b=null;
-	redo_b=null;
 	if(ans_seen==1)
 	{
 		alert('You have seen the Answer !!!');
@@ -116,40 +109,10 @@ SubmitPuzzle.onclick =function()
 	new_game();
 }
 
-//Undo
-undo.onclick = function()
-{
-	if(ans_seen)
-	{
-		return;
-	}
-	if(undo_b!=null)
-	{
-		undo_b.innerText='';
-	}
-}
-
-//Redo
-redo.onclick = function()
-{
-	if(ans_seen)
-	{
-		return;
-	}
-	if(redo_b!=null)
-	{
-		redo_b.innerText=redo_num;
-	}
-}
-
 function new_game()
 {
 	flag=1; //to manipulate the digit plate is active only after New Game button is pressed 
 	ans_seen=0;//not submited yet
-	undo_b=null;
-    redo_b=null;
-	// undo_stack=[];
-	// redo_stack=[];
 
 	 //check=setInterval(set_timer,1000);//calling the set_time() in every second;
 
@@ -172,6 +135,7 @@ function new_game()
 				if(board[i][j]!=0)
 				{
 					arr[i][j].style.color='yellow';
+					lock[i][j]=1;
 				}
 				board_copy[i][j]=board[i][j];
 				//ans[i][j]=board[i][j];
@@ -191,6 +155,7 @@ function generate_board(board,ans)
 		{
 			ans[i][j]=0;
 			board[i][j]=0;
+			lock[i][j]=0;
 			arr[i][j].style.color='aliceblue';
 		}
 	}
@@ -263,24 +228,26 @@ function selectNumber(){
 //to fill the board
 function selectTile() {
 
-	if(flag==0) //if new-game button is not placed then return
+	if(flag==0 || ans_seen==1) //if new-game button is not placed then return
 		return;
 
+
     if (numSelected) {
-        if (this.innerText != "") {
-            return;
-        }
-		undo_b=this;
-		redo_b=this;
         let coords = this.id;
         let val = parseInt(coords);
 		let r=~~(val/9);
 		let c=val%9;
+
+		if(lock[r][c])
+		{
+			return;
+		}
+
 		// "0-0" "0-1" .. "0-9"
 		let a=numSelected.id.split("-"); //["0","1"]
 		let k=parseInt(a[1]);
 		
-		if(k==ans[r][c])
+		if(isSolve(board,r,c,k))
 		{
 			board[r][c]=k;
             this.innerText = k;
@@ -359,7 +326,7 @@ function check(board)
 	{
 		for(j=0;j<9;j++)
 		{
-			if(board[i][j]!=ans[i][j])
+			if(board[i][j]==0 || !isSolve(board,i,j,board[i][j]))
 			{
 				alert("You Lost !!!");
 				return;
@@ -369,6 +336,4 @@ function check(board)
 
 	alert("You Won !!!");
 }
-
-
 
