@@ -77,6 +77,9 @@ GetPuzzle.onclick = function () {
 
 //Answer button
 SolvePuzzle.onclick = () => {
+	if(flag==0) //if new-game button is not placed then return
+	return ;
+	
 	ans_seen=1;
 	FillBoard(ans);
 };
@@ -100,6 +103,9 @@ RestartPuzzle.onclick = function(){
 //submit button
 SubmitPuzzle.onclick =function()
 {
+	if(flag==0) //if new-game button is not placed then return
+	return ;
+
 	if(ans_seen==1)
 	{
 		alert('Can not Submit after watching the Answer !!!');
@@ -336,4 +342,6 @@ function check(board)
 
 	alert("You Won !!!");
 }
+
+
 
