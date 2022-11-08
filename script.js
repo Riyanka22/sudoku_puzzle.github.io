@@ -183,54 +183,47 @@ function new_game()
 
 function generate_board(board,ans)
 {
-	//randomly select a tiles
-	//random() -> generates num [0,1)
-	let row=Math.floor(Math.random()*10);
-	let col=Math.floor(Math.random()*10);
 	let i,j;
-	//row or col ==9 is invalid
-	if(row==9)
-	{
-		row=8;
-	}
-	if(col==9)
-	{
-		col=8;
-	}
+
 	for(i=0;i<9;i++)
 	{
 		for(j=0;j<9;j++)
 		{
 			ans[i][j]=0;
 			board[i][j]=0;
+			arr[i][j].style.color='aliceblue';
 		}
 	}
-	let num=Math.floor(Math.random()*10);//placing random no. on that tiles
+	//placeing random no. in diagonal as diagonals are indipendant of each others
+	//randomly select a tiles
+	//random() -> generates num [0,1)
+	//[0][0] to [2][2]
+	let row=Math.floor(Math.random()*10)%3;
+	let col=Math.floor(Math.random()*10)%3;
+	let num=1+(Math.floor(Math.random()*10)%8);//placing random no. on that tiles
+	ans[row][col]=num;
 
-	//num==0 not possible
-	if(num==0)
-	 ans[row][col]=num+1;
-	else
-	 ans[row][col]=num;
-	 
+	//[3][3] to [5][5]
+	row=3+(Math.floor(Math.random()*10)%3);
+	col=3+(Math.floor(Math.random()*10)%3);
+	num=1+(Math.floor(Math.random()*10)%8);//placing random no. on that tiles
+	ans[row][col]=num;
+
+	//[6][6] to [8][8]
+	row=6+(Math.floor(Math.random()*10)%3);
+	col=6+(Math.floor(Math.random()*10)%3);
+	num=1+(Math.floor(Math.random()*10)%8);//placing random no. on that tiles
+	ans[row][col]=num;
+
+	//solving the ans	
 	SudokuSolver(ans);
 
 	//creating a board by placing some random board[i][j]==ans[row][col]
 	//filling 60 places 
 	for(i=0;i<60;i++)
 	{
-		 row=Math.floor(Math.random()*10);
-		 col=Math.floor(Math.random()*10);
-
-		 //as row or col ==9 is invalid
-		 if(row==9)
-		 {
-			 row=8;
-		 }
-		 if(col==9)
-		 {
-			 col=8;
-		 }
+		 row=Math.floor(Math.random()*10)%9;
+		 col=Math.floor(Math.random()*10)%9;
 
 		 board[row][col]=ans[row][col];
 	}
