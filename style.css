@@ -3,13 +3,17 @@ body{
     background-color: rgb(242, 217, 184);
 }
 
+html{
+    font-size: 10px;
+}
+
 .Heading{
     width: 100%;
-    padding :2px;
+    padding :0.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 4rem;
     font-weight:900;
     font-style: inherit;
     background-color: burlywood;
@@ -27,11 +31,11 @@ body{
     display: flex;
     flex-direction: row;
     /* max-width: 578px; */
-    max-width: 478px;
+    max-width: 47.8rem; 
     flex-wrap: wrap;
 
     /* margin: 20px auto ; */
-    margin: 17px auto;
+    margin: 1.7rem auto;
 }
 
 
@@ -39,15 +43,51 @@ body{
     display:  flex;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
-    /* width: 60px;
-    height: 60px; */
-    width: 50px;
-    height: 50px;
+    border-radius: 0.4rem;
+    width: 5rem;
+    height: 5rem;
     color:aliceblue;
-    font-size: 30px;
+    font-size: 3rem;
 
     box-sizing: border-box;
+}
+
+@media(max-width:500px)
+{
+    html{
+        font-size: 6px;
+    }
+}
+@media(max-width:295px)
+{
+    html{
+        font-size: 4px;
+    }
+}
+@media(max-width:196px)
+{
+    html{
+        font-size: 2.5px;
+    }
+}
+
+@media(max-width:132px)
+{
+    html{
+        font-size: 1.7px;
+    }
+}
+@media(max-width:93px)
+{
+    html{
+        font-size: 1.1px;
+    }
+}
+@media(max-width:65px)
+{
+    html{
+        font-size: 0.76px;
+    }
 }
 
 .Buttons{   
@@ -56,12 +96,12 @@ body{
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;    
-    margin-bottom: 80px;
+    margin-bottom: 8rem;
 }
 
 .dig{
     background-color: #1f998d;
-    border: 2px solid  white;
+    border: 0.2rem solid  white;
 }
 
 .dig:hover{
@@ -78,13 +118,13 @@ body{
     color: #fff;
     font-weight: bold;
     background-color: #538fbe;
-    padding: 10px 35px;
-    font-size: 24px;
-    border: 1px solid #2d6898;
-    box-shadow: inset 0px 1px 0px rgba(255,255,255,.3);
-    margin-right: 10px;
-    margin-top: 10px;
-    border-radius: 10px;
+    padding: 1rem 3.5rem;
+    font-size: 2.4rem;
+    border: 0.1rem solid #2d6898;
+    box-shadow: inset 0rem 0.1rem 0rem rgba(255,255,255,.3);
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
 }
 
 #GetPuzzle:hover,#SolvePuzzle:hover,#RestartPuzzle:hover,#SubmitPuzzle:hover,#undo:hover,#redo:hover{
@@ -93,7 +133,7 @@ body{
 
 .box1{
     background-color: #1520A6;
-    border: 2px solid  white;
+    border: 0.2rem solid  white;
 }
 
 .box1:hover{
@@ -103,7 +143,7 @@ body{
 
 .box2{
     background-color: #BC5448;
-    border: 2px solid  white;
+    border: 0.2rem solid  white;
 }
 .box2:hover{
     background-color: red;
@@ -111,7 +151,7 @@ body{
 
 .box3{
     background-color: #028a0f;
-    border: 2px solid  white;
+    border: 0.2rem solid  white;
 }
 .box3:hover{
     background-color: #3Ded97;
@@ -119,17 +159,17 @@ body{
 }
 
 .bl{
-    border-left: 4px solid black;
+    border-left: 0.4rem solid black;
 }
 
 .bb{
-    border-bottom: 4px solid black;
+    border-bottom: 0.4rem solid black;
 }
 
 .br{
-    border-right: 4px solid black;
+    border-right: 0.4rem solid black;
 }
 
 .bt{
-    border-top: 4px solid black;
+    border-top: 0.4rem solid black;
 }
