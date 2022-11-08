@@ -95,7 +95,12 @@ RestartPuzzle.onclick = function(){
 		alert('You have seen the Answer !!!');
 		return;
 	}
-	FillBoard(board_copy);
+	for (var i = 0; i < 9; i++) {
+		for (var j = 0; j < 9; j++) {
+			board[i][j]=board_copy[i][j];
+		}
+	}
+	FillBoard(board);
 	if (numSelected != null) {
         numSelected.classList.remove("number-selected");
 		numSelected=null;
@@ -343,6 +348,3 @@ function check(board)
 
 	alert("You Won !!!");
 }
-
-
-
