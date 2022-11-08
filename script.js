@@ -1,6 +1,5 @@
 var arr = [[], [], [], [], [], [], [], [], []]
 let numSelected=null;
-let flag=0;
 let ans_seen=0;
 
 //for timer
@@ -36,7 +35,9 @@ let ans_seen=0;
 // 	}
 // }
 
-
+window.onload = ()=>{
+	new_game();
+}
 
 //each arr[i][j] pointing to the id-0,1,2,.....,80 respt. the ids of the small box(html)
 for (var i = 0; i < 9; i++) {
@@ -77,8 +78,8 @@ GetPuzzle.onclick = function () {
 
 //Answer button
 SolvePuzzle.onclick = () => {
-	if(flag==0) //if new-game button is not placed then return
-	return ;
+	// if(flag==0) //if new-game button is not placed then return
+	// return ;
 	
 	ans_seen=1;
 	FillBoard(ans);
@@ -87,8 +88,8 @@ SolvePuzzle.onclick = () => {
 //Restart button -> fill board with old puzzle
 RestartPuzzle.onclick = function(){
 
-	if(flag==0) //if new-game button is not placed then return
-		return ;
+	// if(flag==0) //if new-game button is not placed then return
+	// 	return ;
 	if(ans_seen==1)
 	{
 		alert('You have seen the Answer !!!');
@@ -103,8 +104,8 @@ RestartPuzzle.onclick = function(){
 //submit button
 SubmitPuzzle.onclick =function()
 {
-	if(flag==0) //if new-game button is not placed then return
-	return ;
+	// if(flag==0) //if new-game button is not placed then return
+	// return ;
 
 	if(ans_seen==1)
 	{
@@ -117,7 +118,7 @@ SubmitPuzzle.onclick =function()
 
 function new_game()
 {
-	flag=1; //to manipulate the digit plate is active only after New Game button is pressed 
+	// flag=1; //to manipulate the digit plate is active only after New Game button is pressed 
 	ans_seen=0;//not submited yet
 
 	 //check=setInterval(set_timer,1000);//calling the set_time() in every second;
@@ -234,7 +235,7 @@ function selectNumber(){
 //to fill the board
 function selectTile() {
 
-	if(flag==0 || ans_seen==1) //if new-game button is not placed then return
+	if(ans_seen==1) //if new-game button is not placed then return
 		return;
 
 
@@ -325,8 +326,8 @@ function isSolve( board, r, c, k)
 function check(board)
 {
 	let i,j;
-	if(flag==0)
-		return;
+	// if(flag==0)
+	// 	return;
 
 	for(i=0;i<9;i++)
 	{
